@@ -363,6 +363,7 @@ bool ElevationMap::fuse(const grid_map::Index& topLeftIndex, const grid_map::Ind
       const float weight = std::max(minimalWeight, probability1 * probability2);
       weights[i] = weight;
       const float standardDeviation = sqrt(rawMapCopy.at("variance", *ellipseIterator));
+      // 2 sigma -> arround 95% confidence interval.
       lowerBoundDistribution.add(means[i] - 2.0 * standardDeviation, weight);
       upperBoundDistribution.add(means[i] + 2.0 * standardDeviation, weight);
 

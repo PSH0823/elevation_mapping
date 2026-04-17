@@ -110,7 +110,7 @@ bool SensorProcessorBase::updateTransformations(const ros::Time& timeStamp) {
     poseTFToEigen(transformTf, transform);
     rotationMapToBase_.setMatrix(transform.rotation().matrix());
     translationMapToBaseInMapFrame_.toImplementation() = transform.translation();
-
+    
     if (!firstTfAvailable_) {
       firstTfAvailable_ = true;
     }

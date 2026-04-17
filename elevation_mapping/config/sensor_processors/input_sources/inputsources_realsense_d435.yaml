@@ -1,0 +1,32 @@
+input_sources:
+  d435_front:
+    type: pointcloud
+    topic: /front_camera/depth/color/points
+    queue_size: 1
+    publish_on_update: true
+    sensor_processor:
+      type: structured_light
+      cutoff_min_depth: 0.2
+      cutoff_max_depth: 3.25
+      normal_factor_a: 0.000611
+      normal_factor_b: 0.003587
+      normal_factor_c: 0.3515
+      normal_factor_d: 0
+      normal_factor_e: 1
+      lateral_factor: 0.01576
+
+  d435_rear:
+    type: pointcloud
+    topic: /rear_camera/depth/color/points
+    queue_size: 1
+    publish_on_update: true
+    sensor_processor:
+      type: structured_light
+      cutoff_min_depth: 0.2
+      cutoff_max_depth: 3.25
+      normal_factor_a: 0.000611
+      normal_factor_b: 0.003587
+      normal_factor_c: 0.3515
+      normal_factor_d: 0
+      normal_factor_e: 1
+      lateral_factor: 0.01576

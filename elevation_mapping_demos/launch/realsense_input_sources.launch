@@ -1,0 +1,20 @@
+<launch>
+    <!-- Front camera -->
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="serial_no"         value="337122072996"/>
+        <arg name="camera"            value="front_camera"/>
+        <arg name="enable_pointcloud" value="true"/>
+        <arg name="align_depth"       value="true"/>
+        <arg name="tf_prefix"         value="front_camera"/>
+    </include>
+
+    <!-- Rear camera -->
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="serial_no"         value="313522071839"/>
+        <arg name="camera"            value="rear_camera"/>
+        <arg name="enable_pointcloud" value="true"/>
+        <arg name="align_depth"       value="true"/>
+        <arg name="tf_prefix"         value="rear_camera"/>
+    </include>
+
+</launch>
