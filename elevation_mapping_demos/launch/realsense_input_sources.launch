@@ -1,5 +1,6 @@
 <launch>
-    <!-- Front camera -->
+    <!-- Front Camera -->
+    <!-- launch front camera -->
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
         <arg name="serial_no"         value="337122072996"/>
         <arg name="camera"            value="front_camera"/>
@@ -8,7 +9,23 @@
         <arg name="tf_prefix"         value="front_camera"/>
     </include>
 
-    <!-- Rear camera -->
+    <!-- transform from base to front_camera -->
+    <rosparam file="$(find my_pkg)/config/front.yaml" command="load" ns="front_camera"/>
+
+    <node pkg="tf2_ros"
+          type="static_transform_publisher"
+          name="front_tf"
+          args="$(param front_camera/translation[0])
+                $(param front_camera/translation[1])
+                $(param front_camera/translation[2])
+                $(param front_camera/quaternion[0])
+                $(param front_camera/quaternion[1])
+                $(param front_camera/quaternion[2])
+                $(param front_camera/quaternion[3])
+                base_link front_camera" />
+
+    <!-- Rear Camera -->
+    <!-- launch rear camera -->
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
         <arg name="serial_no"         value="313522071839"/>
         <arg name="camera"            value="rear_camera"/>
@@ -16,5 +33,20 @@
         <arg name="align_depth"       value="true"/>
         <arg name="tf_prefix"         value="rear_camera"/>
     </include>
+
+    <!-- transform from base to rear_camera -->
+    <rosparam file="$(find my_pkg)/config/rear.yaml" command="load" ns="rear_camera"/>
+
+    <node pkg="tf2_ros"
+          type="static_transform_publisher"
+          name="rear_tf"
+          args="$(param rear_camera/translation[0])
+                $(param rear_camera/translation[1])
+                $(param rear_camera/translation[2])
+                $(param rear_camera/quaternion[0])
+                $(param rear_camera/quaternion[1])
+                $(param rear_camera/quaternion[2])
+                $(param rear_camera/quaternion[3])
+                base_link rear_camera" />
 
 </launch>
