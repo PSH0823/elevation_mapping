@@ -10,19 +10,19 @@
     </include>
 
     <!-- transform from base to front_camera -->
-    <rosparam file="$(find my_pkg)/config/front.yaml" command="load" ns="front_camera"/>
+    <!-- <rosparam file="$(find elevation_mapping)/config/sensor_processors/input_sources/TF_base2cam_front.yaml" command="load" ns="front_camera"/> -->
 
     <node pkg="tf2_ros"
           type="static_transform_publisher"
           name="front_tf"
-          args="$(param front_camera/translation[0])
-                $(param front_camera/translation[1])
-                $(param front_camera/translation[2])
-                $(param front_camera/quaternion[0])
-                $(param front_camera/quaternion[1])
-                $(param front_camera/quaternion[2])
-                $(param front_camera/quaternion[3])
-                base_link front_camera" />
+          args="0.13016114280668226
+                0.02916750693624475
+                -0.04555173203281425
+                -0.004524101120165197
+                0.5662313060164184
+                -0.0032108855941659956
+                0.8242277178120722
+                base front_camera_link" />
 
     <!-- Rear Camera -->
     <!-- launch rear camera -->
@@ -35,18 +35,30 @@
     </include>
 
     <!-- transform from base to rear_camera -->
-    <rosparam file="$(find my_pkg)/config/rear.yaml" command="load" ns="rear_camera"/>
+    <!-- <rosparam file="$(find elevation_mapping)/config/sensor_processors/input_sources/TF_base2cam_rear.yaml" command="load" ns="rear_camera"/> -->
 
     <node pkg="tf2_ros"
           type="static_transform_publisher"
           name="rear_tf"
-          args="$(param rear_camera/translation[0])
-                $(param rear_camera/translation[1])
-                $(param rear_camera/translation[2])
-                $(param rear_camera/quaternion[0])
-                $(param rear_camera/quaternion[1])
-                $(param rear_camera/quaternion[2])
-                $(param rear_camera/quaternion[3])
-                base_link rear_camera" />
+          args="-0.21396837017437653
+                -0.022107462377263444
+                -0.04120352245492674
+                -0.5881314435997994
+                0.006226803018929936
+                0.8085936756439807
+                0.015456379975153835
+                base rear_camera_link" />
+
+    <node pkg="tf2_ros"
+          type="static_transform_publisher"
+          name="map_tf"
+          args="0
+                0
+                0
+                0
+                0
+                0
+                1
+                base map" />
 
 </launch>
